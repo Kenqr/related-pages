@@ -1,0 +1,7 @@
+{
+    "manifest_version": 2,
+    "name": "Bookmarks and Histories from Same Domain",
+    "version": "0.1",
+
+    "description": "Show bookmarks and histories from same domain as current page."
+}
