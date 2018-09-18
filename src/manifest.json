@@ -3,5 +3,14 @@
     "name": "Bookmarks and Histories from Same Domain",
     "version": "0.1",
 
-    "description": "Show bookmarks and histories from same domain as current page."
+    "description": "Show bookmarks and histories from same domain as current page.",
+    "icons": {
+        "96": "icons/bookmarks-96.png"
+    },
+
+    "browser_action": {
+        "default_icon": "icons/bookmarks-96.png",
+        "default_title": "Bookmarks and Histories from Same Domain",
+        "default_popup": "popup/list.html"
+    }
 }
