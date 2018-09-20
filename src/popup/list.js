@@ -80,8 +80,12 @@ const $create = function $create(json) {
     // Add properties
     for (const name in attrs) {
         if (attrs.hasOwnProperty(name)) {
+            if (typeof attrs[name] == 'function') {
+                elem.addEventListener(name.replace(/^on/, ''), attrs[name]);
+            } else {
             elem.setAttribute(name, attrs[name]);
         }
+    }
     }
 
     // Add child elements
