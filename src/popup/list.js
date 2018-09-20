@@ -1,4 +1,41 @@
 const init = async function() {
+    const allBookmarks = await getBookmarks();
+
+    // Build list
+    const list = ['li', {}];
+    for (const bookmark of allBookmarks) {
+        list.push([
+            'li', {},
+            [
+                'a',
+                {
+                    href: bookmark.url
+                },
+                bookmark.title
+            ]
+        ]);
+    }
+
+    // Show list on popup
+    $('#main').appendChild($create(list));
+};
+
+const getBookmarks = async function(bookmarkRoot) {
+    let bookmarks = [];
+
+    bookmarkRoot = bookmarkRoot || (await browser.bookmarks.getTree())[0];
+
+    if (bookmarkRoot.url && bookmarkRoot.type !== 'separator') {
+        bookmarks.push(bookmarkRoot);
+    }
+
+    if (bookmarkRoot.children) {
+        for (const child of bookmarkRoot.children) {
+            bookmarks = bookmarks.concat(await getBookmarks(child));
+        }
+    }
+
+    return bookmarks;
 };
 
 /**

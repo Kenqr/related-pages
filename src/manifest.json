@@ -8,6 +8,10 @@
         "96": "icons/bookmarks-96.png"
     },
 
+    "permissions": [
+        "bookmarks"
+    ],
+
     "browser_action": {
         "default_icon": "icons/bookmarks-96.png",
         "default_title": "Bookmarks and Histories from Same Domain",
