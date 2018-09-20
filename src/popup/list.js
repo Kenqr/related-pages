@@ -2,6 +2,16 @@ const init = async function() {
 };
 
 /**
+ * Alias for querySelector
+ * @param {string} selector 
+ * @param {Element} [baseElement=document]
+ * @returns {Element|null}
+ */
+const $ = function(selector, baseElement = document){
+    return baseElement.querySelector(selector);
+};
+
+/**
  * Create element from json template safely
  * Texts are handled with createTextNode(), therefore safe from injection.
  * @see {@link  https://developer.mozilla.org/en-US/docs/Archive/Add-ons/Overlay_Extensions/XUL_School/DOM_Building_and_HTML_Insertion#JSON_Templating|JSON Templating@developer.mozilla.org}
