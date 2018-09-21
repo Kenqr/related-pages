@@ -1,9 +1,19 @@
 const init = async function() {
+    // Get hostname of current tab
+    const tabs = await browser.tabs.query({currentWindow: true, active: true});
+    const url = new URL(tabs[0].url);
+    const hostname = url.hostname;
+
+    // Get bookmarks in the same domain
     const allBookmarks = await getBookmarks();
+    const bookmarksInSameDomain = allBookmarks.filter(bookmark => {
+        const bUrl = new URL(bookmark.url);
+        return bUrl.hostname === hostname && bookmark.url !== tabs[0].url;
+    });
 
     // Build list
     const list = ['li', {}];
-    for (const bookmark of allBookmarks) {
+    for (const bookmark of bookmarksInSameDomain) {
         list.push([
             'li', {},
             [
