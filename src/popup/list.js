@@ -9,7 +9,8 @@ const init = async function() {
             [
                 'a',
                 {
-                    href: bookmark.url
+                    href: bookmark.url,
+                    onclick: onListItemClick, // Open link in current window
                 },
                 bookmark.title
             ]
@@ -18,6 +19,15 @@ const init = async function() {
 
     // Show list on popup
     $('#main').appendChild($create(list));
+};
+
+/** Open link in current window */
+const onListItemClick = function(event){
+    const href = event.target.getAttribute('href');
+    browser.tabs.create({
+        url: href,
+    });
+    event.preventDefault();
 };
 
 const getBookmarks = async function(bookmarkRoot) {
@@ -83,9 +93,9 @@ const $create = function $create(json) {
             if (typeof attrs[name] == 'function') {
                 elem.addEventListener(name.replace(/^on/, ''), attrs[name]);
             } else {
-            elem.setAttribute(name, attrs[name]);
+                elem.setAttribute(name, attrs[name]);
+            }
         }
-    }
     }
 
     // Add child elements
