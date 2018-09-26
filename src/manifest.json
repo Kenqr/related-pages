@@ -10,7 +10,8 @@
 
     "permissions": [
         "activeTab",
-        "bookmarks"
+        "bookmarks",
+        "history"
     ],
 
     "browser_action": {

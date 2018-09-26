@@ -11,24 +11,36 @@ const init = async function() {
         return bUrl.hostname === hostname && bookmark.url !== tabs[0].url;
     });
 
-    // Build list
-    const list = ['li', {}];
+    // Get history items in the same domain
+    const historyItemsInSameDomain = await browser.history.search({text: hostname});
+
+    // Page list
+    const pageList = ['li', {}];
+    const addPageToList = (list, title, url) => {
+        list.push(['li', {}, [
+            'a',
+            {
+                href: url,
+                onclick: onListItemClick, // Open link in current window
+            },
+            title
+        ]]);
+    };
+
+    // Add bookmarks to list
+    pageList.push(['li', {}, 'Bookmarks']);
     for (const bookmark of bookmarksInSameDomain) {
-        list.push([
-            'li', {},
-            [
-                'a',
-                {
-                    href: bookmark.url,
-                    onclick: onListItemClick, // Open link in current window
-                },
-                bookmark.title
-            ]
-        ]);
+        addPageToList(pageList, bookmark.title, bookmark.url);
     }
 
-    // Show list on popup
-    $('#main').appendChild($create(list));
+    // Add history items to list
+    pageList.push(['li', {}, 'History']);
+    for (const historyItem of historyItemsInSameDomain) {
+        addPageToList(pageList, historyItem.title, historyItem.url);
+    }
+
+    // Show list in popup
+    $('#main').appendChild($create(pageList));
 };
 
 /** Open link in current window */
