@@ -1,9 +1,9 @@
 {
     "manifest_version": 2,
-    "name": "Bookmarks and Histories from Same Domain",
+    "name": "Related pages",
     "version": "0.1",
 
-    "description": "Show bookmarks and histories from same domain as current page.",
+    "description": "Show related pages of current page, such as bookmarks and history items in the same domain.",
     "icons": {
         "256": "icons/logo-256.png"
     },
@@ -16,7 +16,7 @@
 
     "browser_action": {
         "default_icon": "icons/logo-256.png",
-        "default_title": "Bookmarks and Histories from Same Domain",
+        "default_title": "Show related pages",
         "default_popup": "popup/list.html"
     }
 }
