@@ -36,7 +36,9 @@ const init = async function() {
     // Add history items to list
     pageList.push(['li', {}, 'History']);
     for (const historyItem of historyItemsInSameDomain) {
-        addPageToList(pageList, historyItem.title, historyItem.url);
+        // History items without title will display url instead
+        const title = historyItem.title || historyItem.url;
+        addPageToList(pageList, title, historyItem.url);
     }
 
     // Show list in popup
