@@ -44,12 +44,15 @@ const init = async function() {
 };
 
 /** Open link in current window */
-const onListItemClick = function(event){
+const onListItemClick = async function(event){
+    event.preventDefault();
+
+    const tabs = await browser.tabs.query({currentWindow: true, active: true}); // Get current tab
     const href = event.target.getAttribute('href');
     browser.tabs.create({
         url: href,
+        index: tabs[0].index+1, // Next to current tab
     });
-    event.preventDefault();
 };
 
 const getBookmarks = async function(bookmarkRoot) {
