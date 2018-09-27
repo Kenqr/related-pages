@@ -5,7 +5,7 @@
 
     "description": "Show bookmarks and histories from same domain as current page.",
     "icons": {
-        "96": "icons/bookmarks-96.png"
+        "256": "icons/logo-256.png"
     },
 
     "permissions": [
@@ -15,7 +15,7 @@
     ],
 
     "browser_action": {
-        "default_icon": "icons/bookmarks-96.png",
+        "default_icon": "icons/logo-256.png",
         "default_title": "Bookmarks and Histories from Same Domain",
         "default_popup": "popup/list.html"
     }
