@@ -11,8 +11,13 @@ const init = async function() {
         return bUrl.hostname === hostname && bookmark.url !== tabs[0].url;
     });
 
-    // Get history items in the same domain
-    const historyItemsInSameDomain = await browser.history.search({text: hostname});
+    // Get history items in the same domain in one year
+    const startTime = new Date();
+    startTime.setFullYear(startTime.getFullYear()-1);
+    const historyItemsInSameDomain = await browser.history.search({
+        text: hostname,
+        startTime: startTime
+    });
 
     // Page list
     const pageList = ['li', {}];
