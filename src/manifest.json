@@ -8,6 +8,12 @@
     "256": "icons/logo-256.png"
   },
 
+  "browser_specific_settings": {
+    "gecko": {
+      "strict_min_version": "60.0" // For ES6 module
+    }
+  },
+
   "permissions": [
     "activeTab",
     "bookmarks",
