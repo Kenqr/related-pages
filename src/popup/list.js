@@ -27,19 +27,24 @@ const init = async function() {
       {
         href: url,
         onclick: onListItemClick, // Open link in current window
+        class: 'page-link',
       },
       title
     ]]);
   };
 
   // Add bookmarks to list
-  pageList.push(['li', {}, 'Bookmarks']);
+  pageList.push(['li', {}, [
+    'h3', {}, '⭐ Bookmarks',
+  ]]);
   for (const bookmark of bookmarksInSameDomain) {
     addPageToList(pageList, bookmark.title, bookmark.url);
   }
 
   // Add history items to list
-  pageList.push(['li', {}, 'History']);
+  pageList.push(['li', {}, [
+    'h3', {}, '🕓 History'
+  ]]);
   for (const historyItem of historyItemsInSameDomain) {
     // History items without title will display url instead
     const title = historyItem.title || historyItem.url;
