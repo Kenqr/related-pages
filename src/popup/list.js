@@ -113,33 +113,24 @@ const $ = function(selector, baseElement = document){
  *    ]
  *  );
  */
-const $create = function $create(json) {
-  const [tag, attrs, ...children] = json;
-
-  // Create element
+const $create = function([tag, attrs = {}, ...children]) {
+  // Create the base element
   const elem = document.createElement(tag);
 
-  // Add properties
-  for (const name in attrs) {
-    if (attrs.hasOwnProperty(name)) {
-      if (typeof attrs[name] == 'function') {
-        elem.addEventListener(name.replace(/^on/, ''), attrs[name]);
-      } else {
-        elem.setAttribute(name, attrs[name]);
-      }
-    }
-  }
-
-  // Add child elements
-  for (let i=0; i<children.length; i++) {
-    if (typeof children[i] === 'object') {
-      const node = $create(children[i]);
-      elem.appendChild(node);
+  // Set attributes
+  Object.getOwnPropertyNames(attrs).forEach(name => {
+    if (typeof attrs[name] == 'function') {
+      elem.addEventListener(name.replace(/^on/, ''), attrs[name]);
     } else {
-      const node = document.createTextNode(children[i]);
-      elem.appendChild(node);
+      elem.setAttribute(name, attrs[name]);
     }
-  }
+  });
+
+  // Create children
+  children.map(child => {
+    if (typeof child === 'object') return $create(child);
+    return document.createTextNode(child);
+  }).forEach(node => elem.appendChild(node));
 
   return elem;
 };
