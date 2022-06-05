@@ -1,22 +1,22 @@
 {
-    "manifest_version": 2,
-    "name": "Related pages",
-    "version": "0.1",
+  "manifest_version": 2,
+  "name": "Related pages",
+  "version": "0.1",
 
-    "description": "Show related pages of current page, such as bookmarks and history items in the same domain.",
-    "icons": {
-        "256": "icons/logo-256.png"
-    },
+  "description": "Show related pages of current page, such as bookmarks and history items in the same domain.",
+  "icons": {
+    "256": "icons/logo-256.png"
+  },
 
-    "permissions": [
-        "activeTab",
-        "bookmarks",
-        "history"
-    ],
+  "permissions": [
+    "activeTab",
+    "bookmarks",
+    "history"
+  ],
 
-    "browser_action": {
-        "default_icon": "icons/logo-256.png",
-        "default_title": "Show related pages",
-        "default_popup": "popup/list.html"
-    }
+  "browser_action": {
+    "default_icon": "icons/logo-256.png",
+    "default_title": "Show related pages",
+    "default_popup": "popup/list.html"
+  }
 }
