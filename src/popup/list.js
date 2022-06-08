@@ -73,6 +73,14 @@ const init = async function() {
 
   // Show list in popup
   $('#main').appendChild($create(pageList));
+
+  // Close the popup after clicking any bookmark
+  const closePopupHandler = () => {
+    setTimeout(() => window.close(), 1);
+  };
+  document.querySelectorAll('.page-link').forEach(elem => {
+    elem.addEventListener('click', closePopupHandler);
+  });
 };
 
 /** Open link in current window */
