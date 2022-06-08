@@ -4,6 +4,9 @@ const init = async function() {
   const url = new URL(tabs[0].url);
   const hostname = url.hostname;
 
+  // Get tabs in the same domain
+  const tabsInSameDomain = await browser.tabs.query({url: `*://${hostname}/*`});
+
   // Get bookmarks in the same domain
   const allBookmarks = await getBookmarks();
   const bookmarksInSameDomain = allBookmarks.filter(bookmark => {
@@ -32,6 +35,23 @@ const init = async function() {
       title
     ]]);
   };
+
+  // Add tabs to list
+  pageList.push(['li', {}, [
+    'h3', {}, '📄 Tabs',
+  ]]);
+  for (const tab of tabsInSameDomain) {
+    pageList.push(['li', {}, [
+      'a',
+      {
+        onclick: function() { // Switch to selected tab
+          browser.tabs.update(tab.id, { active: true });
+        },
+        class: 'page-link',
+      },
+      tab.title
+    ]]);
+  }
 
   // Add bookmarks to list
   pageList.push(['li', {}, [
